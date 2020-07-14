@@ -1,10 +1,10 @@
 #配置mysql数据库
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/management?useSSL=false&useUnicode=true&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.99.205.75:3306/management?useSSL=false&useUnicode=true&serverTimezone=GMT
     username: root
-    password: 150
+    password: 123456
     # 使用阿里的Druid连接池
     type: com.alibaba.druid.pool.DruidDataSource
 #配置mybatis
