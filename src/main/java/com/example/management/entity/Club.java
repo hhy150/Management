@@ -1,26 +1,16 @@
 package com.example.management.entity;
 
-public class Club {
-    private Long id;
-    private String clubName;
+public class Club extends Admin {
+    private String name;
     private String logo;     //url
     private String intro;
-    private Integer isDeleted;
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getClubName() {
-        return clubName;
-    }
-
-    public void setClubName(String clubName) {
-        this.clubName = clubName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLogo() {
@@ -39,19 +29,11 @@ public class Club {
         this.intro = intro;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     @Override
     public String toString() {
         return "Club{" +
                 "id=" + id +
-                ", clubName='" + clubName + '\'' +
+                ", clubName='" + name + '\'' +
                 ", logo='" + logo + '\'' +
                 ", intro='" + intro + '\'' +
                 '}';

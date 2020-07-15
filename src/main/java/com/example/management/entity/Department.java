@@ -1,18 +1,10 @@
 package com.example.management.entity;
 
-public class Department {
-    private Long id;
+public class Department extends Admin {
+
     private String name;
     private Long comId;
-    private Integer isDeleted;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -30,13 +22,6 @@ public class Department {
         this.comId = comId;
     }
 
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
     @Override
     public String toString() {

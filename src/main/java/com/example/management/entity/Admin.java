@@ -2,11 +2,10 @@ package com.example.management.entity;
 
 public class Admin{
 
-    private Long id;
+    protected Long id;
     private String username;
     private String password;
-    private Integer role;  //0代表社团管理员。1代表部门管理员
-    private Integer isDeleted;
+    protected Integer isDeleted;
 
     public Long getId() {
         return id;
@@ -38,15 +37,6 @@ public class Admin{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-    public Integer getRole() {
-        return role;
-    }
-
-    public void setRole(Integer role) {
-        this.role = role;
     }
 
 }

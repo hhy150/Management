@@ -1,8 +1,18 @@
 package com.example.management.entity;
 
-public class AffairType{
+public enum AffairType{
+
+    ACTIVITY(1,"活动"),
+    TASK(2,"任务"),
+    BRICK(3,"搬砖");
     private Integer id;
     private String type;
+
+    AffairType(Integer id, String type) {
+        this.id = id;
+        this.type = type;
+    }
+
 
     public Integer getId() {
         return id;
