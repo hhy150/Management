@@ -5,7 +5,7 @@ public class Admin{
     private Long id;
     private String username;
     private String password;
-    private Integer role;
+    private Integer role;  //0代表社团管理员。1代表部门管理员
     private Integer isDeleted;
 
     public Long getId() {
