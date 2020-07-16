@@ -1,4 +1,4 @@
-package com.example.management;
+package com.example.management.mLogin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
