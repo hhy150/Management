@@ -1,10 +1,18 @@
 package com.example.management.entity;
 
-public class Department extends Admin {
+public class Department extends Admin{
 
     private String name;
     private Long comId;
+    private Integer IsDeleted;
 
+    public Integer getIsDeleted() {
+        return IsDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        IsDeleted = isDeleted;
+    }
 
     public String getName() {
         return name;

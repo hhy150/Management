@@ -5,7 +5,6 @@ public class Admin{
     protected Long id;
     private String username;
     private String password;
-    protected Integer isDeleted;
 
     public Long getId() {
         return id;
@@ -17,14 +16,6 @@ public class Admin{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Integer getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(Integer isDeleted) {
-        this.isDeleted = isDeleted;
     }
 
     public void setPassword(String password) {

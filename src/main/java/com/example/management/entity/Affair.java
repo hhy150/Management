@@ -1,6 +1,7 @@
 package com.example.management.entity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Affair {
     private Long id;

@@ -1,9 +1,20 @@
 package com.example.management.entity;
 
-public class Club extends Admin {
+import org.omg.PortableInterceptor.INACTIVE;
+
+public class Club extends Admin{
     private String name;
     private String logo;     //url
     private String intro;
+    private Integer IsDeleted;
+
+    public Integer getIsDeleted() {
+        return IsDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        IsDeleted = isDeleted;
+    }
 
     public String getName() {
         return name;
