@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.management.dao.AffairDao">
+    <select id="getMemberByName" resultType="com.example.management.entity.Student"
+            parameterType="String">
+        select * from mem where NAME like #{memberName}
+    </select>
+
+    <select id="getMemberByParam" resultType="com.example.management.entity.Student"
+            parameterType="com.example.management.entity.SendAffairParam">
+        select * from mem
+        <where>
+            <if test="receiver!=null and receiver!=''">
+                NAME like concat('%',#{receiver},'%')
+            </if>
+            <if test="deptId!=null and deptId!=''">
+                and dept_id = #{deptId}
+            </if>
+        </where>
+    </select>
+    <select id="getAllMember" resultType="com.example.management.entity.Student">
+        select * from mem
+    </select>
+    <select id="getMemberByDeptId" parameterType="String" resultType="com.example.management.entity.Student">
+        select * from mem where dept_id=#{dept_id}
+    </select>
+    <select id="getAffairByTitle" resultType="com.example.management.entity.Affair">
+        select * from affair where title = #{title}
+    </select>
+    <select id="getAffairById" resultType="com.example.management.entity.Affair">
+        select * from affair where id=#{id}
+    </select>
+    <update id="delAffairByTitle" parameterType="string">
+        update affair
+        set is_deleted = 0
+        where title=#{title};
+    </update>
+    <update id="modifyAffair">
+        update affair
+        <set>
+            <if test="title!=null and title!=''">
+                title = #{title}
+            </if>
+            <if test="content!=null and content!=''">
+                content =#{content}
+            </if>
+            <if test="startTime!=null and startTime!=''">
+                start_time=#{startTime}
+            </if>
+            <if test="endTime!=null and endTime!=''">
+                start_time=#{startTime}
+            </if>
+        </set>
+        <where>
+            <if test="id!=null and id!=''">
+                id=#{id}
+            </if>
+            <if test="title!=null and title!=''">
+                and title=#{title}
+            </if>
+        </where>
+    </update>
+    <insert id="addAffair" parameterType="com.example.management.entity.Affair">
+        insert into affair(end_time, start_time, title, content, TYPE) VALUE (end_time,start_time,title,content,type)
+    </insert>
+</mapper>
