@@ -1,6 +1,6 @@
 package com.example.management.entity;
 
-import org.omg.PortableInterceptor.INACTIVE;
+
 
 public class Club extends Admin{
     private String name;
