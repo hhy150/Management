@@ -1,12 +1,13 @@
 package com.example.management.mLogin.pojo;
 
-import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.NotBlank;
 
 public class LoginParam {
-    @NotNull(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空")
     private String name;
 
-    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空")
     private String password;
 
     public String getPassword() {

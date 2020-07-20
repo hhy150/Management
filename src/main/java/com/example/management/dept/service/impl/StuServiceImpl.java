@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,26 +29,37 @@ public class StuServiceImpl implements StuService {
         String name=String.valueOf(request.getSession().getAttribute(ConstantUtils.USER_NAME));
         Department department=deptMapper.getDeptByName(name);
         PageHelper.startPage(pageNum, pageSize);
-        List<Student> list=stuMapper.getStuList(department.getId());
-        return new PageInfo<>(list);
+
+        List<Student>list = stuMapper.getStuList(department.getId());
+        if(list!=null) {
+            return new PageInfo<>(list);
+        }else {
+            return null;
+        }
+
     }
 
     @Override
-    public boolean addStu(Student student,HttpServletRequest request) {
+    public int addStu(Student student,HttpServletRequest request) {
         String name= String.valueOf(request.getSession().getAttribute(ConstantUtils.USER_NAME));
-        Student stu=stuMapper.getStuByName(student.getStuName());
+        Student stu=stuMapper.getStuByStuId(student.getStuId());
         if(stu==null) {
             Department department=deptMapper.getDeptByName(name);
-            stu.setDeptId(department.getId());
-            stuMapper.addStu(student);
-            return true;
+            try {
+                student.setDeptId(department.getId());
+                stuMapper.addStu(student);
+            }catch (Exception e){
+                System.out.println("空指针");
+                return 0;
+            }
+            return 1;
         }
-        return false;
+        return 2;
     }
 
     @Override
     public boolean updateStu(Student student){
-        Student stu=stuMapper.getStuByName(student.getStuName());
+        Student stu=stuMapper.getStuByStuId(student.getStuId());
         if(stu!=null){
             stuMapper.updateStu(student);
             return true;

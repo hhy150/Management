@@ -22,40 +22,48 @@ public class StuController {
         @Autowired
         StuService stuService;
 
-        private ToolUtil toolUtil;
 
         @RequestMapping("/list")
         public Object getStuList(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
                                  @RequestParam(value = "pageSize",defaultValue = "5")int pageSize,
                                  HttpServletRequest request) {
-            PageInfo pageInfo = stuService.getStuList(pageNum, pageSize, request);
-            if (pageInfo == null) {
-                return toolUtil.result(null, ToolUtil.ERR);
+            PageInfo pageInfo=new PageInfo();
+            try {
+                 pageInfo = stuService.getStuList(pageNum, pageSize, request);
+            }catch (Exception e){
+                System.out.println("空指针");
             }
-            return toolUtil.result(pageInfo, ToolUtil.SUC);
+            if (pageInfo.getList() == null) {
+                return ToolUtil.result(null, ToolUtil.ERR);
+            }
+            return ToolUtil.result(pageInfo, ToolUtil.SUC);
         }
 
         @RequestMapping("/add")
         public Object addStu(@RequestBody Student student, HttpServletRequest request){
 
-            if(stuService.addStu(student, request)) {
-                   return toolUtil.result(null, ToolUtil.SUC);
-               }
-            return toolUtil.result(null,ToolUtil.ERR);
+            if(stuService.addStu(student, request)==1) {
+                return ToolUtil.result(null, ToolUtil.SUC);
+            }else if(stuService.addStu(student, request)==2) {
+                return ToolUtil.result("用户存在", ToolUtil.ERR);
+            }else {
+                return ToolUtil.result(null, ToolUtil.ERR);
+            }
         }
         @RequestMapping("/update")
         public Object update(@RequestBody Student student){
             if(stuService.updateStu(student)){
-                return toolUtil.result(null, ToolUtil.SUC);
+                return ToolUtil.result(null, ToolUtil.SUC);
             }
-            return toolUtil.result(null, ToolUtil.ERR);
+            return ToolUtil.result(null, ToolUtil.ERR);
         }
         @RequestMapping("/delete")
         public Object delete(@RequestBody Student student){
             if(stuService.deleteStu(student)){
-                return toolUtil.result(null, ToolUtil.SUC);
+                return ToolUtil.result(null, ToolUtil.SUC);
             }
-            return toolUtil.result(null, ToolUtil.ERR);
+            return ToolUtil.result(null, ToolUtil.ERR);
         }
+
 
 }

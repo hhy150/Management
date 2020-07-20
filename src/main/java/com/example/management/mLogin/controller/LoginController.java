@@ -6,6 +6,9 @@ import com.example.management.mLogin.service.LoginService;
 import com.example.management.mLogin.util.ConstantUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.BindResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +22,13 @@ public class LoginController {
     LoginService loginService;
 
     @RequestMapping("/login/check")
-    public LoginResponse login(@Valid @RequestBody LoginParam param, HttpServletRequest request) {
+    public LoginResponse login(@Valid @RequestBody LoginParam param, BindingResult bindingResult, HttpServletRequest request) {
+        if(bindingResult.hasErrors()){
+            LoginResponse loginResponse=new LoginResponse(1);
+            loginResponse.setSucMessage(0);
+            loginResponse.setErrorMessage(3);
+            return loginResponse;
+        }
         return loginService.loginCheck(request, param);
     }
 

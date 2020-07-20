@@ -2,8 +2,8 @@ package com.example.management.mLogin.pojo;
 
 public class LoginResponse {
     private int result; //0成功1失败
-    private int sucMessage;//1社员2社团部门管理员3社团admin4superadmin 0 no err
-    private int errorMessage;//1用户不存在 2密码错误 0no err
+    private int sucMessage;//1社员2社团部门管理员3社团admin4superadmin 0 no suc
+    private int errorMessage;//1用户不存在 2密码错误 3用户名密码空 0no err
 
     public LoginResponse(int result){
         this.result=result;
