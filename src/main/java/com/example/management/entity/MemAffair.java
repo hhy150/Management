@@ -1,9 +1,11 @@
 package com.example.management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 public class MemAffair {
     private Long id;
     private Long memId;
     private Long affairId;
+    @JsonIgnore
     private Integer isDeleted;
 
     public Long getId() {

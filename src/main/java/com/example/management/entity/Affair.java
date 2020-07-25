@@ -1,7 +1,9 @@
 package com.example.management.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Affair {
     private Long id;
@@ -11,6 +13,7 @@ public class Affair {
     private String content;
     private Integer isOK;
     private Integer type;
+    @JsonIgnore
     private Integer IsDeleted;
 
     public Long getId() {

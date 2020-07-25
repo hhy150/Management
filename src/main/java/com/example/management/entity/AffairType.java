@@ -1,25 +1,19 @@
 package com.example.management.entity;
 
-public enum AffairType{
+
+
+public enum AffairType {
+
 
     ACTIVITY(1,"活动"),
     TASK(2,"任务"),
     BRICK(3,"搬砖");
-    private Integer id;
+    private int value;
     private String type;
 
-    AffairType(Integer id, String type) {
-        this.id = id;
+    AffairType(int value, String type) {
+        this.value=value;
         this.type = type;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getType() {
@@ -29,4 +23,5 @@ public enum AffairType{
     public void setType(String type) {
         this.type = type;
     }
+
 }

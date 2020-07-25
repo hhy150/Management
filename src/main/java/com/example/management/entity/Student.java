@@ -1,20 +1,43 @@
 package com.example.management.entity;
 
+
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.validation.constraints.Pattern;
+
+@TableName("mem")
 public class Student {
 
+    @TableId(type = IdType.AUTO)
     private Long id;
+    @TableField("name")
     private String stuName;
+    @Pattern(regexp ="^[B|Q][1-9][0-9]{7}$")
+    @TableField("stuid")
     private String stuId;
+    @TableField("college")
     private String stuCollege;
+    @TableField("major")
     private String stuMajor;
-    private Integer stuGender;  //0表示男，1表示女
+    @TableField("gender")
+    private Integer stuGender;   //0表示男，1表示女
+    @JsonIgnore
+    @TableField("password")
     private String stuPassword;
+    @Pattern(regexp = "^[b|q][1-9][0-9]{7}(@njupt.edu.cn)$")
+    @TableField("email")
     private String stuMail;
     private Long deptId;
+    @Pattern(regexp = "^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$")
+    @TableField("phone")
     private String  stuPhone;
+    @Pattern(regexp = "^[1-9][0-9]{4,}$")
+    @TableField("qq")
     private String  stuQq;
+    @JsonIgnore
+    @TableLogic
     private Integer isDeleted;
-
 
     public Long getId() {
         return id;

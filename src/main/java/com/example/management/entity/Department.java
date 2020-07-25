@@ -1,17 +1,25 @@
 package com.example.management.entity;
 
-public class Department extends Admin{
+
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+public class Department extends Admin {
 
     private String name;
+    @TableField("club_id")
     private Long comId;
-    private Integer IsDeleted;
+    @JsonIgnore
+    @TableLogic
+    private Integer isDeleted;
 
     public Integer getIsDeleted() {
-        return IsDeleted;
+        return isDeleted;
     }
 
     public void setIsDeleted(Integer isDeleted) {
-        IsDeleted = isDeleted;
+        this.isDeleted = isDeleted;
     }
 
     public String getName() {
