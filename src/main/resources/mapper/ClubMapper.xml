@@ -1,0 +1,13 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.management.mapper.ClubMapper">
+<!--    <select id="selectDeptByClub" resultType="com.example.management.vo.DepartmentClubVo">-->
+<!--    select d.id ,d.`name` dname,d.`club_id` comId,c.`name` clubName-->
+<!--    from department d-->
+<!--    inner join club c-->
+<!--    on d.`club_id`=c.id  ${ew.customSqlSegment}-->
+<!--   </select>-->
+
+
+</mapper>
