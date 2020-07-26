@@ -10,11 +10,17 @@ public class LoginParam {
     @NotBlank(message = "密码不能为空")
     private String password;
 
+    private String club;
+
     public String getPassword() {
         return password;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getClub() {
+        return club;
     }
 }

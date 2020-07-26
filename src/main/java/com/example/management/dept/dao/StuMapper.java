@@ -22,7 +22,7 @@ public interface StuMapper {
     })
     List<Student> getStuList(long deptId);
 
-    @Select("SELECT * FROM mem WHERE name=#{name} AND is_deleted = 1")   //1没删0删
+    @Select("SELECT * FROM mem WHERE name=#{name} AND dept_id=#{deptId} AND is_deleted = 1")   //1没删0删
     @Results({
             @Result(column="name", property="stuName"),
             @Result(column="stuid", property="stuId"),
@@ -35,9 +35,9 @@ public interface StuMapper {
             @Result(column="email", property="stuMail"),
             @Result(column="qq", property="stuQq"),
     })
-    Student getStuByName(String name);
+    Student getStuByName(@Param("name") String name,@Param("deptId") Long deptId);
 
-    @Select("SELECT * FROM mem WHERE stuid=#{stuId} AND is_deleted = 1")   //1没删0删
+    @Select("SELECT * FROM mem WHERE stuid=#{stuId} AND dept_id=#{deptId} AND is_deleted = 1")   //1没删0删
     @Results({
             @Result(column="name", property="stuName"),
             @Result(column="stuid", property="stuId"),
@@ -50,7 +50,7 @@ public interface StuMapper {
             @Result(column="email", property="stuMail"),
             @Result(column="qq", property="stuQq"),
     })
-    Student getStuByStuId(String stuId);
+    Student getStuByStuId(@Param("stuId") String stuId,@Param("deptId") Long deptId);
 
     @Insert("INSERT INTO mem (name,stuid,password,dept_id,college,major,gender,phone,email,qq) VALUES(#{stuName}," +
             "#{stuId},#{stuPassword},#{deptId},#{stuCollege},#{stuMajor},#{stuGender},#{stuPhone},#{stuMail},#{stuQq})")

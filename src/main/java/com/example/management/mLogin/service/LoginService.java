@@ -5,8 +5,14 @@ import com.example.management.mLogin.pojo.LoginResponse;
 import com.github.pagehelper.PageInfo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 public interface LoginService {
     public LoginResponse loginCheck(HttpServletRequest request, LoginParam param);
-    public PageInfo getList(int pageNum, int pageSize, HttpServletRequest request);
-}
+
+    public List getList();
+
+    public LoginResponse getRole(HttpServletRequest request);
+
+    public PageInfo getListByRole(int pageNum, int pageSize, HttpServletRequest request);
+    }
