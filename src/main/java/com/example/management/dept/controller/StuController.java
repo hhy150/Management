@@ -36,7 +36,7 @@ public class StuController {
             if (pageInfo.getList() == null) {
                 return ToolUtil.result(null, ToolUtil.ERR);
             }
-            return ToolUtil.result(pageInfo, ToolUtil.SUC);
+            return pageInfo;
         }
 
         @RequestMapping("/add")

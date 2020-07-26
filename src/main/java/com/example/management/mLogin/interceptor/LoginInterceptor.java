@@ -15,10 +15,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-        String name = null;
-        name= String.valueOf( request.getSession().getAttribute(ConstantUtils.USER_NAME));
+        String name= String.valueOf( request.getSession().getAttribute(ConstantUtils.USER_NAME));
         if (name == null){
-            response.sendRedirect(request.getContextPath()+"/"); //到时把这改成登录页面的地址
+            response.sendRedirect("/login"); //到时把这改成登录页面的地址
             return false;
         }else {
             return true;

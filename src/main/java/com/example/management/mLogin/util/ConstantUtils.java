@@ -6,4 +6,5 @@ public class ConstantUtils {
 
     public final static String USER_ROLE="ROLE";
 
+    public final static String USER_CLUB="CLUB";
 }

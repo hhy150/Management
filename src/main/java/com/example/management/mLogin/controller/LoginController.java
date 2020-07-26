@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class LoginController {
@@ -24,8 +25,7 @@ public class LoginController {
     @RequestMapping("/login/check")
     public LoginResponse login(@Valid @RequestBody LoginParam param, BindingResult bindingResult, HttpServletRequest request) {
         if(bindingResult.hasErrors()){
-            LoginResponse loginResponse=new LoginResponse(1);
-            loginResponse.setSucMessage(0);
+            LoginResponse loginResponse=new LoginResponse(1,0,0);
             loginResponse.setErrorMessage(3);
             return loginResponse;
         }
@@ -33,10 +33,13 @@ public class LoginController {
     }
 
     @RequestMapping("/login/list")
-    public PageInfo getList(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                            @RequestParam(value = "pageSize",defaultValue = "5")int pageSize, HttpServletRequest request){
+    public List getList(){
 
-        return loginService.getList(pageNum, pageSize, request);
+        return loginService.getList();
+    }
+    @RequestMapping("/login/getRole")
+    public LoginResponse getRole(HttpServletRequest request){
+        return loginService.getRole(request);
     }
 
     @RequestMapping("/login/logout")
@@ -45,6 +48,7 @@ public class LoginController {
         try {
             request.getSession().removeAttribute(ConstantUtils.USER_NAME);
             request.getSession().removeAttribute(ConstantUtils.USER_ROLE);
+            request.getSession().removeAttribute(ConstantUtils.USER_CLUB);
             msg="退出成功";
         }catch (Exception e){
             e.printStackTrace();
