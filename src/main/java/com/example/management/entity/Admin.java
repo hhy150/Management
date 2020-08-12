@@ -1,9 +1,19 @@
 package com.example.management.entity;
 
-public class Admin{
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+
+public class Admin implements Serializable {
+
+    @TableId(type = IdType.AUTO)
     protected Long id;
     private String username;
+    @JsonIgnore
     private String password;
 
     public Long getId() {

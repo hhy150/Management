@@ -1,19 +1,25 @@
 package com.example.management.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Club extends Admin{
+import java.io.Serializable;
+
+public class Club extends Admin {
+
     private String name;
     private String logo;     //url
     private String intro;
-    private Integer IsDeleted;
+    @JsonIgnore
+    @TableLogic
+    private Integer isDeleted;
 
     public Integer getIsDeleted() {
-        return IsDeleted;
+        return isDeleted;
     }
-
     public void setIsDeleted(Integer isDeleted) {
-        IsDeleted = isDeleted;
+        this.isDeleted = isDeleted;
     }
 
     public String getName() {
@@ -44,6 +50,7 @@ public class Club extends Admin{
     public String toString() {
         return "Club{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", clubName='" + name + '\'' +
                 ", logo='" + logo + '\'' +
                 ", intro='" + intro + '\'' +

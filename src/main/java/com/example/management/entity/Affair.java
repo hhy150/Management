@@ -1,9 +1,12 @@
 package com.example.management.entity;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 
-public class Affair {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+public class Affair  implements Serializable {
     private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
@@ -11,6 +14,7 @@ public class Affair {
     private String content;
     private Integer isOK;
     private Integer type;
+    @JsonIgnore
     private Integer IsDeleted;
 
     public Long getId() {

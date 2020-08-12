@@ -1,9 +1,14 @@
 package com.example.management.entity;
 
-public class MemAffair {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
+
+public class MemAffair implements Serializable {
     private Long id;
     private Long memId;
     private Long affairId;
+    @JsonIgnore
     private Integer isDeleted;
 
     public Long getId() {
