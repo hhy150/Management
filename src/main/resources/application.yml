@@ -1,17 +1,19 @@
-<<<<<<< HEAD
 server:
   port: 8083
 spring:
   profiles:
     active: dev
-  #配置mysql数据库
+#配置mysql数据库
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.99.205.75:3306/management?useSSL=false&useUnicode=true&serverTimezone=GMT&characterEncoding=UTF-8
+    url: jdbc:mysql://47.99.205.75:3306/management?useSSL=false&useUnicode=true&serverTimezone=GMT&characterEncoding=UTF-8&tinyInt1isBit=false
     username: root
     password: 123456
 # 使用阿里的Druid连接池
     type: com.alibaba.druid.pool.DruidDataSource
+# 配置redis
+  redis:
+    database: 1
 
 #配置mybatis
 mybatis-plus:
@@ -20,29 +22,13 @@ mybatis-plus:
   global-config:
     db-config:
       logic-delete-field: is_deleted  #全局逻辑删除字段值 3.3.0开始支持，详情看下面。
-      logic-delete-value:  0 # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
-#枚举类的扫描包
-  type-enums-package: com.example.management.entity
+      logic-delete-value:  1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+#枚举类的扫描包(通用枚举)
+  type-enums-package: com.example.management.entity.enums
 
 #配置日志：打印出SQL语句
 logging:
   level:
-    root: warn
     com.example.management.mapper: trace
-  pattern:
-    console: '%p%m%n'
-=======
-#配置mysql数据库
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.99.205.75:3306/management?useSSL=false&useUnicode=true&serverTimezone=GMT
-    username: root
-    password: 123456
-    # 使用阿里的Druid连接池
-    type: com.alibaba.druid.pool.DruidDataSource
-#配置mybatis
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
->>>>>>> 10ee1ed2ed14d5b7bf04264b2fecda1c66dceabd
+

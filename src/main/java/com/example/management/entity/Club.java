@@ -4,6 +4,8 @@ package com.example.management.entity;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
+
 public class Club extends Admin {
 
     private String name;

@@ -3,9 +3,10 @@ package com.example.management.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Affair {
+public class Affair  implements Serializable {
     private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

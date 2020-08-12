@@ -1,0 +1,23 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.management.mapper.DepartmentMapper">
+
+    <select id="selectAllStuByDept" resultMap="student" parameterType="long">
+        SELECT `id`,`name`,`stuid`,`college`,`major`,`gender`,`phone`,`qq`,`email`
+        FROM mem
+        WHERE `dept_id`=#{id}
+        AND `is_deleted`=0;
+    </select>
+    <resultMap id="student" type="com.example.management.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="stuName"/>
+        <result column="stuid" property="stuId"/>
+        <result column="college" property="stuCollege"/>
+        <result column="major" property="stuMajor"/>
+        <result column="gender" property="stuGender"/>
+        <result column="email" property="stuMail"/>
+        <result column="phone" property="stuPhone"/>
+        <result column="qq" property="stuQq"/>
+    </resultMap>
+</mapper>

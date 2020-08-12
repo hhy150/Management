@@ -8,15 +8,16 @@ import com.example.management.entity.Student;
 import com.example.management.mapper.DepartmentMapper;
 import com.example.management.mapper.StudentMapper;
 import com.example.management.service.DepartmentService;
-import com.example.management.utils.MD5Util;
+import com.example.management.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 
 @Service
 public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,Department> implements DepartmentService {
-
 
     private DepartmentMapper departmentMapper;
     private StudentMapper studentMapper;
@@ -29,6 +30,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,Departme
     /**
      *删除部门
      */
+    @CacheEvict(value = "dept",key = "#id",condition = "#result==true")
     @Override
     public Boolean deleteById(Long id) {
         if(departmentMapper.selectById(id)==null)
@@ -45,6 +47,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,Departme
     /**
      *插入部门
      */
+    @CachePut(value = "dept",key = "#department.id")
     @Override
     public Boolean insert(Department department) {
         department.setPassword(MD5Util.Md5(department.getPassword()));
@@ -53,6 +56,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper,Departme
         return true;
     }
 
+    @CachePut(value = "dept",key = "#dept.id")
     @Override
     public Boolean update(Department dept){
         dept.setPassword(MD5Util.Md5(dept.getPassword()));

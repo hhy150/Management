@@ -1,15 +1,16 @@
 package com.example.management.entity;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.management.entity.enums.ResultEnum;
 import com.example.management.exception.BaseError;
 
-public class ResultBody<T> {
+public class ResultBody {
 
     private Integer code;
 
     private String message;
 
-    private  T data;
+    private  Object data;
 
     public ResultBody() {
     }
@@ -35,11 +36,11 @@ public class ResultBody<T> {
         this.message = message;
     }
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
@@ -92,6 +93,17 @@ public class ResultBody<T> {
     public static ResultBody error( String message) {
         ResultBody rb = new ResultBody();
         rb.setCode(0);
+        rb.setMessage(message);
+        rb.setData(null);
+        return rb;
+    }
+
+    /**
+     * 失败或成功
+     */
+    public static ResultBody state( String message) {
+        ResultBody rb = new ResultBody();
+        rb.setCode(1);
         rb.setMessage(message);
         rb.setData(null);
         return rb;

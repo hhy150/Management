@@ -2,12 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.management.mapper.ClubMapper">
-<!--    <select id="selectDeptByClub" resultType="com.example.management.vo.DepartmentClubVo">-->
-<!--    select d.id ,d.`name` dname,d.`club_id` comId,c.`name` clubName-->
-<!--    from department d-->
-<!--    inner join club c-->
-<!--    on d.`club_id`=c.id  ${ew.customSqlSegment}-->
-<!--   </select>-->
 
+    <!--一个社团下成员数量,注意逻辑删除-->
+    <select id="getStuCountByClub" parameterType="Long" resultType="_int">
+        SELECT
+            COUNT(distinct m.`stuid`) num
+        FROM
+             mem m,(SELECT `id` FROM department WHERE `club_id`=#{id} AND `is_deleted`=1) t2
+        WHERE
+             m.`dept_id`=t2.`id`
+        AND
+             m.is_deleted=0;
+    </select>
+    <!--一个社团下部门数量-->
+    <select id="getDeptCount" parameterType="long" resultType="_int">
+       SELECT COUNT(`id`)num FROM department WHERE `club_id`=#{id} AND is_deleted=0;
+    </select>
+
+    <!--只获取部分 List<Student>  selectAllStu(Long id);-->
+    <sql id="Student_Column_List">
+        `stuid`, `name`, `college`,`major`,`gender`,`phone`,`email`,`qq`,`password`,`dept_id`
+    </sql>
+    <select id="selectAllStuByClub" resultMap="student">
+        SELECT
+           <include refid="Student_Column_List"/>
+        FROM
+           mem m
+        INNER JOIN
+           (SELECT `id` FROM department WHERE club_id=#{id}) d
+        ON
+           m.`dept_id`= d.`id`
+        AND
+           m.`is_deleted`=0;
+    </select>
+    <resultMap id="student" type="com.example.management.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="stuName"/>
+        <result column="stuid" property="stuId"/>
+        <result column="college" property="stuCollege"/>
+        <result column="major" property="stuMajor"/>
+        <result column="gender" property="stuGender"/>
+        <result column="email" property="stuMail"/>
+        <result column="phone" property="stuPhone"/>
+        <result column="qq" property="stuQq"/>
+    </resultMap>
 
 </mapper>

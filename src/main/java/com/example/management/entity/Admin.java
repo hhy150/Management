@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 
-public class Admin{
+public class Admin implements Serializable {
 
     @TableId(type = IdType.AUTO)
     protected Long id;
-    @Pattern(regexp = "^[D|C]([\\u4E00-\\u9FA5A-Za-z0-9]+)$",message = "用户名格式不正确")
     private String username;
     @JsonIgnore
     private String password;

@@ -1,31 +1,36 @@
 package com.example.management.entity;
 
-public class SendAffairParam extends Department {
+public class SendAffairParam {
 
-
-    public static final String SEND_RANDOMLY="random";
-
-    public static final String SEND_PERSONAL="personal";
-
-    public static final String SEND_CONDITIONAL="conditional";
-
-    public static final String SEND_ALL="all";
 
     private int limit;
 
-    private String memCondition; //从上面四个选
+    //全部发送，单人发送，群发
+    private String memCondition;
 
-    private String templateType; //从UTIL里面的字符串选
+    private String templateType;
 
     private String senderName;
 
-    private String senderId;
+    private Long senderId;
 
-    public void setSenderId(String senderId) {
+    private String receiver;
+
+    private Affair content;
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setSenderId(long senderId) {
         this.senderId = senderId;
     }
 
-    public String getSenderId() {
+    public long getSenderId() {
         return senderId;
     }
 
@@ -59,5 +64,13 @@ public class SendAffairParam extends Department {
 
     public int getLimit() {
         return limit;
+    }
+
+    public void setContent(Affair content) {
+        this.content = content;
+    }
+
+    public Affair getContent() {
+        return content;
     }
 }

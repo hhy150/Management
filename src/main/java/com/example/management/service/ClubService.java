@@ -3,17 +3,14 @@ package com.example.management.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.management.entity.Club;
-import com.example.management.entity.Department;
-import com.example.management.entity.Student;
-
-import java.util.List;
 
 
 public interface ClubService extends IService<Club> {
 
-    Club getByName(String name);
 
-    Department getDeptByName(String clubName, String deptName);
+    IPage<Club> getBatchByName(String name,int pageNum,int pageSize);
+
+    //Department getDeptByName(String clubName, String deptName);
 
     Boolean deleteById(Long id);
 
@@ -21,9 +18,15 @@ public interface ClubService extends IService<Club> {
 
     IPage<Club> getAllClub(int pageNum, int pageSize);
 
+/*
     IPage<Department> getBatchDeptByClub(String clubName,int pageNum,int pageSize);
 
     IPage<Student> getBatchStuByDept(String clubName,String deptName,int pageNum,int pageSize);
 
     Student selectByStuId(String clubName,String deptName,String stuId);
+*/
+
+    Integer getDeptCount();
+
+
 }
