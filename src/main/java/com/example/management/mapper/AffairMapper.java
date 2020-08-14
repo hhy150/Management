@@ -88,7 +88,7 @@ public interface AffairMapper {
         @Result(column="start_time", property="startTime", jdbcType=JdbcType.TIMESTAMP),
         @Result(column="title", property="title", jdbcType=JdbcType.VARCHAR),
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
-        @Result(column="is_OK", property="isOk", jdbcType=JdbcType.BIT),
+        @Result(column="is_OK", property="isOK", jdbcType=JdbcType.BIT),
         @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
         @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT)
     })

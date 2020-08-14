@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -36,7 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+@CacheConfig(cacheNames = "stu")
 @Service
 public class StuServiceImpl implements StuService {
 
@@ -51,7 +52,7 @@ public class StuServiceImpl implements StuService {
     @Autowired
     private LoginMapper loginMapper;
 
-    @CachePut(value = "stu",key = "#student.id",condition = "#result==true")
+    @CachePut(value = "stu",key = "#student.stuId",condition = "#result==true")
     @Override
     public int addStu(Student student, HttpServletRequest request) {
         String name= String.valueOf(request.getSession().getAttribute(ConstantUtils.USER_NAME));
@@ -71,7 +72,7 @@ public class StuServiceImpl implements StuService {
         return 2;
     }
 
-    @CachePut(value = "stu",key = "#student.id",condition = "#result==true")
+    @CachePut(value = "stu",key = "#student.stuId",condition = "#result==true")
     @Override
     public boolean updateStu(Student student){
         Student stu=stuMapper.getStuByStuId(student.getStuId(),student.getDeptId());
@@ -83,7 +84,7 @@ public class StuServiceImpl implements StuService {
         }
     }
 
-    @CacheEvict(value = "stu",key = "#student.id",condition = "#result==true")
+    @CacheEvict(value = "stu",key = "#student.stuId",condition = "#result==true")
     @Override
     public boolean deleteStu(Student student) {
         if(student.getStuId()!=null) {
@@ -95,13 +96,14 @@ public class StuServiceImpl implements StuService {
     }
 
     //根据dept_id获得stuList
+    @Cacheable(key = "#p0")
     @Override
     public List<Student> getList(Long deptId){
         return stuMapper.getStuList(deptId);
     }
 
 
-    @Cacheable(value = "stu",key = "#result.id",condition = "#result==true")
+    @Cacheable(value = "stu",key = "#name+deptId",condition = "#result==true")
     @Override
     public Student getStuByName(String name,Long deptId){
         return stuMapper.getStuByName(name,deptId);
@@ -130,7 +132,7 @@ public class StuServiceImpl implements StuService {
         return null;
     }
 
-
+    @Cacheable(value = "stu",key = "#stuId")
     @Override
     public Student getStuByStuId(String stuId) {
         UpdateWrapper<Student> wrapper = new UpdateWrapper<Student>()

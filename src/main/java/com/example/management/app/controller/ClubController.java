@@ -84,7 +84,7 @@ public class ClubController {
 
      //通过stuId查找学生
     @GetMapping("stu")
-    public ResultBody getStuById(String stuId){
+    public ResultBody getStuById(@RequestParam("stuId") String stuId){
         Student stu = stuService.getStuByStuId(stuId);
         if(stu!=null)
             return ResultBody.success(stu);

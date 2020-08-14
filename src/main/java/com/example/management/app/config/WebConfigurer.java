@@ -28,7 +28,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(new AuthInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/login")
-                .excludePathPatterns("/login/check");//不拦截登录页面
+                .excludePathPatterns("/login/check","/login/getList");//不拦截登录页面
     }
 
 }
