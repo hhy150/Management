@@ -35,7 +35,6 @@ public class GlobalExceptionHandler {
         //改进一下返回信息。
         return ResultBody.error(ResultEnum.UNSUPPORTED_MEDIA_TYPE);
     }
-
     /**
      *捕获空指针异常
      */
@@ -49,9 +48,9 @@ public class GlobalExceptionHandler {
      * 捕获400异常
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResultBody  HttpMessageNotReadableExceptionHandler( HttpMessageNotReadableException e){
-        logger.error("错误请求",e.getMessage());
-        return ResultBody.error(ResultEnum.BAD_REQUEST);
+        public ResultBody  HttpMessageNotReadableExceptionHandler( HttpMessageNotReadableException e){
+            logger.error("错误请求",e.getMessage());
+            return ResultBody.error(ResultEnum.BAD_REQUEST);
     }
 
     /**
@@ -63,7 +62,7 @@ public class GlobalExceptionHandler {
         return ResultBody.error(ResultEnum.IO_EXCEPTION);
     }
 
-    /**
+     /**
      *权限认证
      */
     @ExceptionHandler(value = AuthException.class)

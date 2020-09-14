@@ -1,13 +1,14 @@
 package com.example.management.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.management.entity.*;
 import com.example.management.mapper.ClubMapper;
 import com.example.management.mapper.DepartmentMapper;
 import com.example.management.mapper.StudentMapper;
 import com.example.management.service.ResetPwdService;
+import com.example.management.service.StuService;
 import com.example.management.util.ConstantUtils;
 import com.example.management.util.MD5Util;
-import com.sun.mail.imap.protocol.BODY;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,7 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
         SessionAttributes attributes = new SessionAttributes(role, username);
         return attributes;
     }
+
 
     private boolean hasAuth(int type){
         int role=getAttributes(httpSession).getRole();
@@ -102,7 +104,6 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
     //重置多人密码
     @Override
     public Boolean resetPwds(ArrayList<Long> list, String newPwd,int type){
-        //ArrayList<Long> 不合适
         if(!hasAuth(type))
             return false;
         newPwd= MD5Util.Md5(newPwd);
@@ -142,14 +143,22 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
     @Override
     public Boolean resetAllPwd(String newPwd){
         int role=getAttributes(httpSession).getRole();
+        String username=getAttributes(httpSession).getUsername();
         newPwd= MD5Util.Md5(newPwd);
         switch (role){
             case 2:
-                return stu(studentMapper,newPwd);
+                Department dept = departmentMapper.selectOne(new QueryWrapper<Department>().eq("username", username));
+                List<Student> students = departmentMapper.selectAllStuByDept(dept.getId());
+                return stu(studentMapper,newPwd,students);
             case 3:
-                return dept(departmentMapper,newPwd)&&stu(studentMapper,newPwd);
+                Club club = clubMapper.selectOne(new QueryWrapper<Club>().eq("username", username));
+                List<Student> students2 = clubMapper.selectAllStuByClub(club.getId());
+                List<Department> depts = departmentMapper.selectList(new QueryWrapper<Department>().eq("club_id", club.getId()));
+                return dept(departmentMapper,newPwd,depts)&&stu(studentMapper,newPwd,students2);
             case 4:
-                return club(clubMapper,newPwd)&&dept(departmentMapper,newPwd)&&stu(studentMapper,newPwd);
+                List<Student> students1= studentMapper.selectList(null);
+                List<Department> depts1 = departmentMapper.selectList(null);
+                return club(clubMapper,newPwd)&&dept(departmentMapper,newPwd,depts1)&&stu(studentMapper,newPwd,students1);
         }
         return true;
     }
@@ -157,9 +166,9 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
 
 
     @NotNull
-    static Boolean stu(StudentMapper studentMapper,String newPwd){
-        List<Student> students3 = studentMapper.selectList(null);
-        for (Student stu: students3) {
+    //还得看是啥角色。
+    static Boolean stu(StudentMapper studentMapper,String newPwd,List<Student> students){
+        for (Student stu: students) {
             stu.setStuPassword(newPwd);
             int i = studentMapper.updateById(stu);
             if (i==0) return false;
@@ -178,9 +187,8 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
     }
 
     @NotNull
-    static Boolean dept(DepartmentMapper departmentMapper,String newPwd){
-        List<Department> departments3 = departmentMapper.selectList(null);
-        for (Department dept:departments3) {
+    static Boolean dept(DepartmentMapper departmentMapper,String newPwd,List<Department> depts){
+        for (Department dept:depts) {
             dept.setPassword(newPwd);
             int i = departmentMapper.updateById(dept);
             if (i==0) return false;

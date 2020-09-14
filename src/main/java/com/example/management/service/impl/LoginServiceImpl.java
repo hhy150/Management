@@ -111,7 +111,7 @@ public class LoginServiceImpl implements LoginService {
         SessionAttributes attributes = new SessionAttributes(role, username);
         return attributes;
     }
-    //controller层没用到？？
+
     @Override
     public PageInfo getListByRole(int pageNum, int pageSize) {
         int role =attributes().getRole();

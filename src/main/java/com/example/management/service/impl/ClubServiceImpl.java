@@ -27,18 +27,14 @@ import java.util.List;
 @Service
 public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements ClubService {
 
-    private  LoginMapper loginMapper;
-    private StudentMapper studentMapper;
     private ClubMapper clubMapper;
     private DepartmentMapper departmentMapper;
     private  HttpSession httpSession;
     @Autowired
-    public ClubServiceImpl(ClubMapper clubMapper, DepartmentMapper departmentMapper, StudentMapper studentMapper, HttpSession httpSession, LoginMapper loginMapper){
+    public ClubServiceImpl(ClubMapper clubMapper, DepartmentMapper departmentMapper, HttpSession httpSession){
         this.clubMapper=clubMapper;
         this.departmentMapper=departmentMapper;
-        this.studentMapper=studentMapper;
         this.httpSession = httpSession;
-        this.loginMapper = loginMapper;
     }
 
 
@@ -77,7 +73,8 @@ public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements Cl
     @Override
     public Boolean insert(Club club) {
         club.setPassword(MD5Util.Md5(club.getPassword()));
-        if( clubMapper.insert(club)==0) return false;
+        if( clubMapper.insert(club)==0)
+            return false;
         return true;
     }
 

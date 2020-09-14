@@ -39,11 +39,11 @@ public interface AffairMapper {
         "insert into affair (id, end_time, ",
         "start_time, title, ",
         "content, is_OK, type, ",
-        "is_deleted)",
+        "is_deleted，club_id)",
         "values (#{id,jdbcType=BIGINT}, #{endTime,jdbcType=TIMESTAMP}, ",
         "#{startTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, ",
         "#{content,jdbcType=VARCHAR}, #{isOk,jdbcType=BIT}, #{type,jdbcType=INTEGER}, ",
-        "#{isDeleted,jdbcType=BIT})"
+        "#{isDeleted,jdbcType=BIT},#{club_id,jdbcType=INTEGER})"
     })
     boolean insert(Affair record);
 
@@ -55,7 +55,7 @@ public interface AffairMapper {
      */
     @Select({
         "select",
-        "id, end_time, start_time, title, content, is_OK, type, is_deleted",
+        "id, end_time, start_time, title, content, is_OK, type, is_deleted，club_id",
         "from affair",
         "where id = #{id,jdbcType=BIGINT}"
     })
@@ -67,7 +67,8 @@ public interface AffairMapper {
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="is_OK", property="isOk", jdbcType=JdbcType.BIT),
         @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT)
+        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT),
+        @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
     })
     Affair selectByPrimaryKey(int id);
 
@@ -79,7 +80,7 @@ public interface AffairMapper {
      */
     @Select({
         "select",
-        "id, end_time, start_time, title, content, is_OK, type, is_deleted",
+        "id, end_time, start_time, title, content, is_OK, type, is_deleted，club_id",
         "from affair"
     })
     @Results({
@@ -90,7 +91,8 @@ public interface AffairMapper {
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="is_OK", property="isOK", jdbcType=JdbcType.BIT),
         @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT)
+        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT),
+        @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
     })
     List<Affair> selectAll();
 
@@ -109,6 +111,7 @@ public interface AffairMapper {
           "is_OK = #{isOk,jdbcType=BIT},",
           "type = #{type,jdbcType=INTEGER},",
           "is_deleted = #{isDeleted,jdbcType=BIT}",
+            "club_id = #{club_id,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     boolean updateByPrimaryKey(Affair affair);

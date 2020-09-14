@@ -1,6 +1,5 @@
 package com.example.management.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.management.entity.*;
 import com.example.management.mapper.ClubMapper;
@@ -9,18 +8,12 @@ import com.example.management.mapper.StudentMapper;
 import com.example.management.mapper.SuperAdminMapper;
 import com.example.management.service.CommonService;
 import com.example.management.util.ConstantUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.example.management.util.MD5Util;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.List;
 
 @Service
 public class CommonServiceImpl implements CommonService {
@@ -63,6 +56,7 @@ public class CommonServiceImpl implements CommonService {
         //此处需要判断一下
         int role=attributes().getRole();
         String username =attributes().getUsername();
+        newPwd= MD5Util.Md5(newPwd);
         //1社员2社团部门管理员3社团admin4superadmin 0 no suc
         switch (role){
             case 1:

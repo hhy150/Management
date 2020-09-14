@@ -16,6 +16,7 @@ public class Affair  implements Serializable {
     private Integer type;
     @JsonIgnore
     private Integer IsDeleted;
+    private Integer club_id;
 
     public Long getId() {
         return id;

@@ -9,6 +9,7 @@ import com.example.management.mapper.LoginMapper;
 import com.example.management.service.ClubService;
 import com.example.management.service.LoginService;
 import com.example.management.service.StuService;
+import com.example.management.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,11 +49,13 @@ public class ClubController {
     }
 
     /**
-     *更新社团
+     *更新社团,不应该更新密码吧
      */
     @PutMapping("update")
     public ResultBody update(@Valid Club community){
-        if(clubService.updateById(community))
+        Club club = clubService.getById(community.getId());
+        community.setPassword(MD5Util.Md5(club.getPassword()));
+        if(!clubService.updateById(community))
             return ResultBody.error("更新失败");
         return ResultBody.success();
     }
