@@ -6,48 +6,50 @@ import com.example.management.service.MemAffairService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@CacheConfig(cacheNames = "memAffair")
 @Service
 public class MemAffairSeviceImpl implements MemAffairService {
    @Autowired
    MemAffairMapper memAffairMapper;
 
-    @CacheEvict(value = "memAffair",key = "#id",condition = "#result==true")
+    @CacheEvict(key = "#id",condition = "#result==true")
     @Override
     public boolean deleteMemAffairById(int id) {
         return memAffairMapper.deleteByPrimaryKey(id);
     }
 
-    @CachePut(value = "memAffair",key = "#id",condition = "#result==true")
+    @CachePut(key = "#id",condition = "#result==true")
     @Override
     public boolean UnDeleteByPrimaryKey(int id) {
         return memAffairMapper.deleteByPrimaryKey(id);
     }
 
-    @CachePut(value = "memAffair",key = "#memAffair.id",condition = "#result==true")
+    @CachePut(key = "#memAffair.id",condition = "#result==true")
     @Override
     public boolean addMemAffair(MemAffair memAffair) {
         return memAffairMapper.insert(memAffair);
     }
 
-    @CachePut(value = "memAffair",key = "#memAffair.id",condition = "#result==true")
+    @CachePut(key = "#memAffair.id",condition = "#result==true")
     @Override
     public boolean updateMemAffair(MemAffair memAffair) {
         return memAffairMapper.updateByPrimaryKey(memAffair);
     }
 
-    @Cacheable(value = "memAffair",key = "#id")
+    @Cacheable(key = "#id")
     @Override
     public MemAffair getAffairById(int id) {
         return memAffairMapper.selectByPrimaryKey(id);
     }
 
+    @Cacheable(key = "#root.methodName")
     @Override
     public PageInfo<MemAffair> getAll(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);

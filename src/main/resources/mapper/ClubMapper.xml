@@ -8,7 +8,7 @@
         SELECT
             COUNT(distinct m.`stuid`) num
         FROM
-             mem m,(SELECT `id` FROM department WHERE `club_id`=#{id} AND `is_deleted`=1) t2
+             mem m,(SELECT `id` FROM department WHERE `club_id`=#{id} AND `is_deleted`=0) t2
         WHERE
              m.`dept_id`=t2.`id`
         AND

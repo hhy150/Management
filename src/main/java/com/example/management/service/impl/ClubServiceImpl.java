@@ -15,6 +15,7 @@ import com.example.management.service.ClubService;
 import com.example.management.util.ConstantUtils;
 import com.example.management.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+@CacheConfig(cacheNames = "club")
 @Service
 public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements ClubService {
 
@@ -52,7 +53,7 @@ public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements Cl
     /**
      *根据id删除一个部门(内存判断成功吗？)
      */
-    @CacheEvict(value = "club",key = "#id",condition = "#result==true")
+    @CacheEvict(key = "#id",condition = "#result==true")
     @Override
     public Boolean deleteById(Long id) {
 
@@ -68,7 +69,7 @@ public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements Cl
      /**
      *插入一个部门
      */
-     @CachePut(value = "club",key = "#club.id",condition = "#result==true")
+     @CachePut(key = "#club.id",condition = "#result==true")
     @Override
     public Boolean insert(Club club) {
         club.setPassword(MD5Util.Md5(club.getPassword()));
@@ -80,6 +81,7 @@ public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements Cl
      /**
      *获得所有的社团
      */
+    @Cacheable(key = "#root.methodName")
     @Override
     public IPage<Club> getAllClub(int pageNum, int pageSize) {
         IPage<Club> page = clubMapper.selectPage(new Page<>(pageNum, pageSize), null);

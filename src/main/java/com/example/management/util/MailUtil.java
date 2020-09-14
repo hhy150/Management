@@ -4,7 +4,7 @@ package com.example.management.util;
 import com.example.management.entity.MemAffair;
 import com.example.management.entity.Student;
 import com.example.management.mapper.MemAffairMapper;
-import com.sun.net.ssl.internal.ssl.Provider;
+//import com.sun.security.sasl.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -40,7 +36,7 @@ public class MailUtil {
      */
     public MailUtil() {
         // 设置SSL连接、邮件环境
-        Security.addProvider(new Provider());
+    //    Security.addProvider(new Provider());
         props = System.getProperties();
         props.setProperty("mail.smtp.host", "smtp.qq.com");
         props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);

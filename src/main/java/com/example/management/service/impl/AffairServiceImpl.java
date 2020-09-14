@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@CacheConfig(cacheNames = "affair")
 @Service
 public class AffairServiceImpl implements AffairService {
 
@@ -68,6 +69,7 @@ public class AffairServiceImpl implements AffairService {
     /**
      * 添加分页
      */
+    @Cacheable(key = "#root.methodName")
     @Override
     public PageInfo<Affair> getAll(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
