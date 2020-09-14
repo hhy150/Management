@@ -13,10 +13,6 @@ import com.example.management.util.ConstantUtils;
 import com.example.management.util.EnumUtil;
 import com.example.management.util.ExcelUtil;
 import com.example.management.util.MD5Util;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,8 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -54,9 +48,11 @@ public class StuServiceImpl implements StuService {
     @CachePut(value = "stu",key = "#student.id",condition = "#result==true")
     @Override
     public int addStu(Student student, HttpServletRequest request) {
-        String name= String.valueOf(request.getSession().getAttribute(ConstantUtils.USER_NAME));
+        Object  name= request.getSession().getAttribute(ConstantUtils.USER_NAME);
+        if(name==null)
+             return 0;
         Long clubId=(Long)request.getSession().getAttribute(ConstantUtils.USER_CLUB);
-        Department department=deptMapper.getDeptByName(name,clubId);
+        Department department=deptMapper.getDeptByName( (String)name ,clubId);
         Student stu=stuMapper.getStuByStuId(student.getStuId(),department.getId());
         if(stu==null) {
             try {
@@ -71,7 +67,8 @@ public class StuServiceImpl implements StuService {
         return 2;
     }
 
-    @CachePut(value = "stu",key = "#student.id",condition = "#result==true")
+    //没有存好redis,key不能是#student.id,因为更新的sql语句中没有用这个条件，用stuId就可以的。
+    @CachePut(value = "stu",key = "#student.stuId",condition = "#result==true")
     @Override
     public boolean updateStu(Student student){
         Student stu=stuMapper.getStuByStuId(student.getStuId(),student.getDeptId());
@@ -259,5 +256,4 @@ public class StuServiceImpl implements StuService {
             return true;
         return false;
     }
-
 }

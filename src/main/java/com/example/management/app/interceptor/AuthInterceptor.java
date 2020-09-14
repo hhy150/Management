@@ -23,27 +23,25 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object o) throws AuthException, IOException {
-        //怎么判断404路径？？就是不存在的路径
         Object role1 = request.getSession().getAttribute(ConstantUtils.USER_ROLE);//记得修改一下，
         int role=0;
         if(role1!= null)
             role=(int)role1;
         String url =  request.getServletPath();
         System.out.println(url);
-        if("/error".equals(url)){
-            //这个response怎么相应
-            response.sendError(404,"not found");
-            throw new AuthException("404 : not found");
-        }
+//        if("/error".equals(url)){
+//            //这个response怎么相应
+//            response.sendError(404,"not found");
+//            throw new AuthException("404 : not found");
+//        }
         switch (role){
             case 1:
                 if(hasAuth(AuthURL.STU_AUTH,url))
                     return true;
                 throw new AuthException("没有权限");
             case 2:
-                if(hasAuth(AuthURL.DEPT_AUTH,url)){
+                if(hasAuth(AuthURL.DEPT_AUTH,url))
                     return true;
-                }
                 throw new AuthException("没有权限");
             case 3:
                 if(hasAuth(AuthURL.CLUB_AUTH,url))
@@ -60,7 +58,7 @@ public class AuthInterceptor implements HandlerInterceptor {
          }
          log.info("发生错误，角色不存在");
          return false;
-    }
+}
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {

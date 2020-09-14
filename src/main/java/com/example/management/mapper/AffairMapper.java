@@ -67,8 +67,8 @@ public interface AffairMapper {
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="is_OK", property="isOk", jdbcType=JdbcType.BIT),
         @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT)，
-            @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
+        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT),
+        @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
     })
     Affair selectByPrimaryKey(int id);
 
@@ -91,8 +91,8 @@ public interface AffairMapper {
         @Result(column="content", property="content", jdbcType=JdbcType.VARCHAR),
         @Result(column="is_OK", property="isOk", jdbcType=JdbcType.BIT),
         @Result(column="type", property="type", jdbcType=JdbcType.INTEGER),
-        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT)，
-            @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
+        @Result(column="is_deleted", property="isDeleted", jdbcType=JdbcType.BIT),
+        @Result(column="club_id", property="club_id", jdbcType=JdbcType.INTEGER)
     })
     List<Affair> selectAll();
 

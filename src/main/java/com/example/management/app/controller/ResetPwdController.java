@@ -2,10 +2,8 @@ package com.example.management.app.controller;
 
 import com.example.management.entity.ResultBody;
 import com.example.management.service.ResetPwdService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 
 @RestController
@@ -28,13 +26,13 @@ public class ResetPwdController {
       return ResultBody.error("重置失败");
     }
 
-    /**
+     /**
      *重置多个密码
      */
     @PutMapping("batch")
-    public ResultBody resetPwds(ArrayList<Long> list, String newPwd,int type) {
-      if( resetPwdService.resetPwds(list,newPwd,type))
-          return ResultBody.success();
+    public ResultBody resetPwds(@RequestBody  ArrayList<Long> list, String newPwd, int type) {
+        if( resetPwdService.resetPwds(list,newPwd,type))
+            return ResultBody.success();
         return ResultBody.error("重置失败");
     }
 

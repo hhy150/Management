@@ -17,4 +17,6 @@ public interface ClubMapper extends BaseMapper<Club> {
 
     List<Student> selectAllStuByClub(Long id);
 
+
+
 }
