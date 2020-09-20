@@ -28,12 +28,6 @@ public class AuthInterceptor implements HandlerInterceptor {
         if(role1!= null)
             role=(int)role1;
         String url =  request.getServletPath();
-        System.out.println(url);
-//        if("/error".equals(url)){
-//            //这个response怎么相应
-//            response.sendError(404,"not found");
-//            throw new AuthException("404 : not found");
-//        }
         switch (role){
             case 1:
                 if(hasAuth(AuthURL.STU_AUTH,url))
@@ -78,9 +72,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         AntPathMatcher matcher = new AntPathMatcher();
         for(String auth:roleAuth) {
             if (matcher.match(auth, url)) {
-                log.info("认证通过");
-                return true;
-            }
+            log.info("认证通过");
+            return true;
+        }
         }
         log.info("认证失败");
         return false;

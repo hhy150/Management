@@ -56,7 +56,7 @@ public class MemAffairController {
      */
     @RequestMapping("/memaffair/getall")
     public ResultBody getAll(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
-                           @RequestParam(value = "pageSize",defaultValue = "5")int pageSize){
+                             @RequestParam(value = "pageSize",defaultValue = "5")int pageSize){
         PageInfo<MemAffair> all = memAffairSevice.getAll(pageNum, pageSize);
         return ResultBody.success(all);
     }

@@ -10,7 +10,6 @@ public class MemAffair implements Serializable {
     private Long affairId;
     @JsonIgnore
     private Integer isDeleted;
-
     public Long getId() {
         return id;
     }
