@@ -76,8 +76,12 @@ public class LoginServiceImpl implements LoginService {
                 }
         }
         if(loginResponse.getResult()==0){
+            System.out.println(username+"suc");
+            System.out.println(loginResponse.getSucMessage());
+
             request.getSession().setAttribute(ConstantUtils.USER_NAME, username);
             request.getSession().setAttribute(ConstantUtils.USER_ROLE, loginResponse.getSucMessage());
+            System.out.println(request.getSession().getAttribute(ConstantUtils.USER_ROLE));
         }else{
             request.getSession().removeAttribute(ConstantUtils.USER_NAME);
             request.getSession().removeAttribute(ConstantUtils.USER_ROLE);
@@ -85,7 +89,6 @@ public class LoginServiceImpl implements LoginService {
         return loginResponse;
     }
 
-    @Cacheable(key = "#methodName")
     @Override
     public List getList(){
         List<Club> list=loginMapper.getClubList();

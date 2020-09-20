@@ -81,7 +81,7 @@ public class ClubServiceImpl extends ServiceImpl<ClubMapper, Club> implements Cl
      /**
      *获得所有的社团
      */
-    @Cacheable(key = "#root.methodName")
+//    @Cacheable(key = "#root.methodName")
     @Override
     public IPage<Club> getAllClub(int pageNum, int pageSize) {
         IPage<Club> page = clubMapper.selectPage(new Page<>(pageNum, pageSize), null);

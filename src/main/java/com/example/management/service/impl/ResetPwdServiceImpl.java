@@ -6,7 +6,6 @@ import com.example.management.mapper.ClubMapper;
 import com.example.management.mapper.DepartmentMapper;
 import com.example.management.mapper.StudentMapper;
 import com.example.management.service.ResetPwdService;
-import com.example.management.service.StuService;
 import com.example.management.util.ConstantUtils;
 import com.example.management.util.MD5Util;
 import org.jetbrains.annotations.NotNull;
@@ -72,7 +71,7 @@ public class ResetPwdServiceImpl implements ResetPwdService  {
     }
 
 
-    //重置一个密码
+    //重置一个密码，type指的是想要被重置密码的人的type。
     @Override
     public Boolean resetPwd(Long id, String newPwd,int type) {
         if(!hasAuth(type))

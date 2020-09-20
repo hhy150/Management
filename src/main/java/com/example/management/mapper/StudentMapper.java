@@ -58,7 +58,7 @@ public interface StudentMapper extends BaseMapper<Student> {
 
     @Insert("INSERT INTO mem (name,stuid,password,dept_id,college,major,gender,phone,email,qq) VALUES(#{stuName}," +
             "#{stuId},#{stuPassword},#{deptId},#{stuCollege},#{stuMajor},#{stuGender},#{stuPhone},#{stuMail},#{stuQq})")
-    void addStu(Student student);
+    int addStu(Student student);
 
     @Update("UPDATE mem SET name=#{stuName},college=#{stuCollege},major=#{stuMajor}," +
             "gender=#{stuGender},phone=#{stuPhone},email=#{stuMail},qq=#{stuQq} WHERE stuid=#{stuId}")

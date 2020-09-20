@@ -34,8 +34,9 @@ public class LoginController {
         return loginService.loginCheck(request, param);
     }
 
-    @GetMapping("getList")
+    @GetMapping("list")
     public ResultBody getList(){
+        System.out.println("iiii");
         return ResultBody.success(loginService.getList());
     }
 

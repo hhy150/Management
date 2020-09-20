@@ -25,47 +25,5 @@ class ManagementApplicationTests {
     public void contextLoads(){
 
     }
-@Autowired
-private StuService stuService;
-    @Autowired
-    private ClubMapper clubMapper;
-    @Autowired
-    private StudentMapper studentMapper;
-    @Autowired
-    private DepartmentMapper departmentMapper;
 
-    @Test
-    public void test(){
-        System.out.println(stuService.getStuByName("sf", 1L));
-    }
-
-    @Test
-    public void test12() throws IOException {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletResponse response = attributes.getResponse();
-        String[] head={"姓名","学号","学院","专业","性别","南邮邮箱","电话号码","QQ"};
-        String fileName="D://export/成员表.xls";
-        List<Student> students = clubMapper.selectAllStuByClub(2L);
-        List<String[]> data=new ArrayList<>();
-        String[] stu = new String[9];
-        for (Student s : students) {
-            //将一个stu化成String[]
-            String gender = s.getStuGender().getGender();
-            //如何把这个也放到redis中》》
-
-            stu[0]=s.getStuName();
-            stu[1]=s.getStuId();
-            stu[2]=s.getStuCollege();
-            stu[3]=s.getStuMajor();
-            stu[4]=gender;
-            stu[5]=s.getStuMail();
-            stu[6]=s.getStuPhone();
-            stu[7]=s.getStuQq();
-
-            data.add(stu);
-        }
-        ExcelData excelData = new ExcelData(fileName, head, data);
-        ExcelUtil.exportExcel(response,excelData,"校科协");
-
-    }
 }

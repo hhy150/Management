@@ -4,7 +4,7 @@ package com.example.management.entity;
 public class AuthURL {
    //可访问的路径的规则
    //注意/* 和/** 的区别
-   public static String[] STU_AUTH = {"/common/**","/login/check"};
+   public static String[] STU_AUTH = {"/common/**","login/logout"};
    public static String[] CLUB_AUTH ={"/common/**", "/resetPwd/**","memaffair/**",
            "/affair/**", "/dept/**","/stu/**","/club/update","/login/**"};
    public static String[] DEPT_AUTH ={"/common/**","/resetPwd/**",

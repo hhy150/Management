@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = SQLException.class)
     public ResultBody SQLExceptionHandler(SQLException e){
         logger.error("数据库操作异常:",e.getMessage());
-        return ResultBody.error(e.getErrorCode(),e.getMessage());
+        return ResultBody.error(e.getErrorCode(),null);
     }
 
     /**

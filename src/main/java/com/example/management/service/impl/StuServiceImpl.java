@@ -46,26 +46,36 @@ public class StuServiceImpl implements StuService {
     @Autowired
     private LoginMapper loginMapper;
 
-    @CachePut(value = "stu",key = "#student.stuId",condition = "#result==true")
+    @CachePut(value = "stu",key = "#student.stuId",condition = "#result==1")
     @Override
-    public int addStu(Student student, HttpServletRequest request) {
+    public int  addStu(Student student, HttpServletRequest request) {
         Object  name= request.getSession().getAttribute(ConstantUtils.USER_NAME);
+        int role = getAttributes(httpSession).getRole();
+        int judge=0;
+        Student stu =null;
         if(name==null)
-             return 0;
-        Long clubId=(Long)request.getSession().getAttribute(ConstantUtils.USER_CLUB);
-        Department department=deptMapper.getDeptByName( (String)name ,clubId);
-        Student stu=stuMapper.getStuByStuId(student.getStuId(),department.getId());
-        if(stu==null) {
-            try {
-                student.setDeptId(department.getId());
-                stuMapper.addStu(student);
-            }catch (Exception e){
-                System.out.println("空指针");
-                return 0;
-            }
-            return 1;
+            return 0;
+        //1社员2社团部门管理员3社团admin4superadmin 0 no suc
+        switch (role){
+            case 2:
+                Department dept=deptMapper.selectOne(new QueryWrapper<Department>().eq("username",name));
+                stu=stuMapper.getStuByStuId(student.getStuId(),dept.getId());
+                student.setDeptId(dept.getId());
+                if(stu!=null)
+                    judge=2;
+                judge = stuMapper.addStu(student);
+                break;
+            case 3:
+                //根据dept_id判断stu
+                stu=stuMapper.getStuByStuId(student.getStuId(),student.getDeptId());
+                if(stu!=null)
+                    judge=2;
+                judge=stuMapper.addStu(student);
+                break;
+            default:
+                judge=0;
         }
-        return 2;
+        return judge;
     }
 
     @CachePut(value = "stu",key = "#student.stuId",condition = "#result==true")
@@ -104,8 +114,6 @@ public class StuServiceImpl implements StuService {
     public Student getStuByName(String name,Long deptId){
         return stuMapper.getStuByName(name,deptId);
     }
-
-
 
     @Override
     public Integer getStuCount() {

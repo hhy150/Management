@@ -19,8 +19,7 @@ public class WebConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/swagger-ui.html")
                 .excludePathPatterns("/webjars/**")
-                .excludePathPatterns("/login/check")
-                .excludePathPatterns("/login");//不拦截登录页面
+                .excludePathPatterns("/login/**");//不拦截登录页面
     }
 
 }
