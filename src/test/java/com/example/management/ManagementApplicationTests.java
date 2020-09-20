@@ -7,17 +7,15 @@ import com.example.management.mapper.ClubMapper;
 import com.example.management.mapper.DepartmentMapper;
 import com.example.management.mapper.StudentMapper;
 import com.example.management.util.ExcelUtil;
+import com.example.management.service.StuService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,7 +25,8 @@ class ManagementApplicationTests {
     public void contextLoads(){
 
     }
-
+@Autowired
+private StuService stuService;
     @Autowired
     private ClubMapper clubMapper;
     @Autowired
@@ -35,6 +34,10 @@ class ManagementApplicationTests {
     @Autowired
     private DepartmentMapper departmentMapper;
 
+    @Test
+    public void test(){
+        System.out.println(stuService.getStuByName("sf", 1L));
+    }
 
     @Test
     public void test12() throws IOException {

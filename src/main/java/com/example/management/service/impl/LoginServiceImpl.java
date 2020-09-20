@@ -10,12 +10,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+@CacheConfig(cacheNames = "login")
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -83,7 +85,7 @@ public class LoginServiceImpl implements LoginService {
         return loginResponse;
     }
 
-  //  @Cacheable(value = "club",key = "#root.methodName")
+    @Cacheable(key = "#methodName")
     @Override
     public List getList(){
         List<Club> list=loginMapper.getClubList();

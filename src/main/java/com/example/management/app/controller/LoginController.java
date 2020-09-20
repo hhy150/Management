@@ -34,20 +34,11 @@ public class LoginController {
         return loginService.loginCheck(request, param);
     }
 
-/*
-    //为什么类表直接获得clubList？？不应该按角色来获取的吗？
-    @GetMapping("/login/getList")
+    @GetMapping("getList")
     public ResultBody getList(){
         return ResultBody.success(loginService.getList());
     }
-*/
 
-    //为什么类表直接获得clubList？？不应该按角色来获取的吗？
-    @GetMapping("getList")
-    public ResultBody getList( @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum,
-                               @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize){
-        return ResultBody.success(loginService.getListByRole(pageNum,pageSize));
-    }
 
     @GetMapping("getRole")
     public LoginResponse getRole(HttpServletRequest request){
