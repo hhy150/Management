@@ -36,7 +36,7 @@ public class LoginServiceImpl implements LoginService {
         LoginResponse loginResponse = new LoginResponse(1,0,0);
         switch (role){
             case 4:
-                Admin superAdmin= loginMapper.getSuperAdmin(password);
+                Admin superAdmin= loginMapper.getSuperAdmin(username);
                 if(superAdmin==null){
                     loginResponse.setErrorMessage(2);
                 }else {
