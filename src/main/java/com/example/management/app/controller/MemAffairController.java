@@ -42,7 +42,7 @@ public class MemAffairController {
             return ResultBody.success();
         return ResultBody.error("更新成功");
     };
-
+    /*不需要查找，故注释掉
     @RequestMapping("/memaffair/get")
     public ResultBody getAffairById(@RequestParam("id") Integer id){
         MemAffair memAffair = memAffairSevice.getAffairById(id);
@@ -50,7 +50,7 @@ public class MemAffairController {
             return ResultBody.success(memAffair);
         return  ResultBody.error("查找失败");
     }
-
+*/
     /**
      *添加分页
      */

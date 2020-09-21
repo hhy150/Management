@@ -38,13 +38,15 @@ public class AffairServiceImpl implements AffairService {
 
     @CachePut(value = "affair",key = "#id")
     @Override
-    public boolean deleteAffairById(int id) {
+    public boolean deleteAffairById(Long id) {
         return  affairMapper.deleteByPrimaryKey(id);
     }
-
+    /**
+     修改id类型为long
+     */
     @CachePut(value = "affair",key = "#id")
     @Override
-    public boolean UnDeleteByPrimaryKey(int id) {
+    public boolean UnDeleteByPrimaryKey(Long id) {
         return affairMapper.UndeleteByPrimaryKey(id);
     }
 
@@ -62,7 +64,7 @@ public class AffairServiceImpl implements AffairService {
 
     @Cacheable(value = "affair",key = "#id")
     @Override
-    public Affair getAffairById(int id) {
+    public Affair getAffairById(Long id) {
         return affairMapper.selectByPrimaryKey(id);
     }
 

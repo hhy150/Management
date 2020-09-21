@@ -7,14 +7,16 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 public interface AffairService {
-    Affair getAffairById(int id);
+    Affair getAffairById(Long id);
 
-    boolean deleteAffairById(int id);
+    boolean deleteAffairById(Long id);
 
     boolean addAffair(Affair affair);
 
-    boolean UnDeleteByPrimaryKey(int id);
-
+    boolean UnDeleteByPrimaryKey(Long id);
+    /**
+     修改id类型为long
+     */
     boolean updateAffair(Affair affair);
 
     PageInfo<Affair> getAll(int pageNum, int pageSize);
