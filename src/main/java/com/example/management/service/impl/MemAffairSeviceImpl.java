@@ -43,6 +43,7 @@ public class MemAffairSeviceImpl implements MemAffairService {
         return memAffairMapper.updateByPrimaryKey(memAffair);
     }
 
+    
     @Cacheable(key = "#id")
     @Override
     public MemAffair getAffairById(int id) {
