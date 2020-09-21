@@ -16,14 +16,14 @@ public class MemAffairController {
     MemAffairService memAffairSevice;
 
     @RequestMapping("/memaffair/delete")
-    public ResultBody deleteAffairById(@RequestParam("id") Integer id){
+    public ResultBody deleteAffairById(@RequestParam("id") Long id){
         if(memAffairSevice.deleteMemAffairById(id))
             return ResultBody.success();
         return ResultBody.error("删除失败");
     }
 
     @RequestMapping("/memaffair/undelete")
-    public ResultBody unDeleteAffairById(@RequestParam("id") Integer id){
+    public ResultBody unDeleteAffairById(@RequestParam("id") Long id){
         if(memAffairSevice.UnDeleteByPrimaryKey(id))
             return ResultBody.success();
         return ResultBody.error("撤销失败");

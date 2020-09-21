@@ -24,14 +24,14 @@ public class AffairController {
     private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @PutMapping("delete")
-    public ResultBody UndeleteAffairById(@RequestParam("id") Integer id){
+    public ResultBody UndeleteAffairById(@RequestParam("id") Long id){
         if(affairService.deleteAffairById(id))
             return ResultBody.success();
         return ResultBody.error("删除失败");
     }
 
     @PutMapping("undelete")
-    public ResultBody deleteAffairById(@RequestParam("id") Integer id){
+    public ResultBody deleteAffairById(@RequestParam("id") Long id){
        if(affairService.UnDeleteByPrimaryKey(id))
            return ResultBody.success();
        return ResultBody.error("删除失败");
@@ -52,13 +52,15 @@ public class AffairController {
     }
 
     @GetMapping("get")
-    public ResultBody getAffairById(@RequestParam("id") Integer id){
+    public ResultBody getAffairById(@RequestParam("id") Long id){
         Affair affair = affairService.getAffairById(id);
         if(affair!=null)
             return ResultBody.success(affair);
         return  ResultBody.error("查找失败");
     }
-
+    /**
+     修改id类型为long
+     */
 
     /**
      * 添加分页
@@ -73,7 +75,7 @@ public class AffairController {
 
 
     @RequestMapping("/send")
-    public ResultBody sendAffair(@RequestParam("affairId")int affairId, @RequestParam String templateType, String memCondition,@RequestParam String name) {
+    public ResultBody sendAffair(@RequestParam("affairId")Long affairId, @RequestParam String templateType, String memCondition,@RequestParam String name) {
         SendAffairParam sendAffairParam = new SendAffairParam();
         Affair affair = affairService.getAffairById(affairId);
         if (affair == null){
