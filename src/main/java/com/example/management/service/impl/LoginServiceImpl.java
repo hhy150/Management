@@ -38,6 +38,8 @@ public class LoginServiceImpl implements LoginService {
             case 4:
                 Admin superAdmin= loginMapper.getSuperAdmin(username);
                 if(superAdmin==null){
+                    loginResponse.setErrorMessage(1);
+                }else if(!superAdmin.getPassword().equals(password)){
                     loginResponse.setErrorMessage(2);
                 }else {
                     loginResponse.setSucMessage(4);
@@ -57,7 +59,9 @@ public class LoginServiceImpl implements LoginService {
                 break;
             case 2:
                 Department dept=loginMapper.getDeptByName(username);
-                if(!dept.getPassword().equals(password)){
+                if(dept==null){
+                    loginResponse.setErrorMessage(1);
+                }else if(!dept.getPassword().equals(password)){
                     loginResponse.setErrorMessage(2);
                 }else {
                     loginResponse.setSucMessage(2);

@@ -1,4 +1,4 @@
-package com.example.management.exception;
+package com.example.management.app.handler;
 
 import com.example.management.entity.ResultBody;
 import org.springframework.http.HttpHeaders;

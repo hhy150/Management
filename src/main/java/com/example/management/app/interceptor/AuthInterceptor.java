@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@Component
+//@Component
 public class AuthInterceptor implements HandlerInterceptor {
 
     private final static Logger log= LoggerFactory.getLogger(AuthInterceptor.class);
@@ -25,11 +25,11 @@ public class AuthInterceptor implements HandlerInterceptor {
                              Object o) throws AuthException, IOException {
         Integer role1 = (Integer) request.getSession().getAttribute(ConstantUtils.USER_ROLE);//记得修改一下，
         System.out.println(role1);
-        int role=0;
-//        if(role1!= null)
-//            role=(int)role1;
         String url =  request.getServletPath();
-        switch (role){
+        System.out.println(url);
+        if(role1==null)
+            throw new AuthException("未登录");
+        switch (role1.intValue()){
             case 1:
                 if(hasAuth(AuthURL.STU_AUTH,url))
                     return true;
@@ -46,15 +46,10 @@ public class AuthInterceptor implements HandlerInterceptor {
                 if(hasAuth(AuthURL.SUPER_ADMIN_AUTH,url))
                     return true;
                 throw new AuthException("没有权限");
-            case 0:
-/*                //表示没有登录
-                response.sendRedirect("/login.html");//登录页面.*/
-          /*      System.out.println("11");
-                return false;*/
-                throw new AuthException("未登录");
          }
          log.info("发生错误，角色不存在");
          return false;
+
 }
 
     @Override

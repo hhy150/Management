@@ -1,7 +1,8 @@
-package com.example.management.exception;
+package com.example.management.app.handler;
 
 import com.example.management.entity.ResultBody;
 import com.example.management.entity.enums.ResultEnum;
+import com.example.management.exception.AuthException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -68,7 +69,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AuthException.class)
     public ResultBody AuthExceptionHandler(AuthException e){
         logger.error("没有权限",e);
-        return ResultBody.error(ResultEnum.NO_AUTH);
+        return ResultBody.error(e.getMessage());
     }
 
 }

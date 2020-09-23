@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableCaching
+//@EnableCaching
 @EnableTransactionManagement
 @EnableRedisHttpSession
 @MapperScan(basePackages = "com.example.management.mapper")

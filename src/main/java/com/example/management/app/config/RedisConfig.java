@@ -29,11 +29,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-@EnableCaching
-@Configuration
+//@EnableCaching
+//@Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 
-    @Bean
+    //@Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
         config = config.entryTtl(Duration.ofMinutes(1))

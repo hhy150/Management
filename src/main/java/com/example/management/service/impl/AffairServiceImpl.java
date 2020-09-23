@@ -36,7 +36,7 @@ public class AffairServiceImpl implements AffairService {
 
     private static final String SUCCESS = "派发成功";
 
-    @CachePut(value = "affair",key = "#id")
+    //@CachePut(value = "affair",key = "#id")
     @Override
     public boolean deleteAffairById(Long id) {
         return  affairMapper.deleteByPrimaryKey(id);
@@ -44,25 +44,25 @@ public class AffairServiceImpl implements AffairService {
     /**
      修改id类型为long
      */
-    @CachePut(value = "affair",key = "#id")
+  //  @CachePut(value = "affair",key = "#id")
     @Override
     public boolean UnDeleteByPrimaryKey(Long id) {
         return affairMapper.UndeleteByPrimaryKey(id);
     }
 
-    @CachePut(value = "affair",key = "#affair.id")
+//    @CachePut(value = "affair",key = "#affair.id")
     @Override
     public boolean addAffair(Affair affair) {
         return affairMapper.insert(affair);
     }
 
-    @CachePut(value = "affair",key = "affair.id")
+  //  @CachePut(value = "affair",key = "affair.id")
     @Override
     public boolean updateAffair(Affair affair) {
         return affairMapper.updateByPrimaryKey(affair);
     }
 
-    @Cacheable(value = "affair",key = "#id")
+//    @Cacheable(value = "affair",key = "#id")
     @Override
     public Affair getAffairById(Long id) {
         return affairMapper.selectByPrimaryKey(id);
@@ -71,11 +71,11 @@ public class AffairServiceImpl implements AffairService {
     /**
      * 添加分页
      */
-    @Cacheable(key = "#root.methodName")
+    //@Cacheable(key = "#root.methodName")
     @Override
     public PageInfo<Affair> getAll(int pageNum,int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List <Affair> list;
+        List <Affair> list = null;
         list=affairMapper.selectAll();
         PageInfo<Affair> pageInfo = new PageInfo<>(list);
         return  pageInfo;

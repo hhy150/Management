@@ -55,7 +55,7 @@ public class MemAffairSeviceImpl implements MemAffairService {
     /**
      修改id类型为long
      */
-    @Cacheable(key = "#root.methodName")
+    //@Cacheable(key = "#root.methodName")
     @Override
     public PageInfo<MemAffair> getAll(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
