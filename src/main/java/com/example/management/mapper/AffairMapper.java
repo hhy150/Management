@@ -12,36 +12,19 @@ import java.util.List;
 public interface AffairMapper {
 
     //待修改
-    @Update("update affair set is_deleted = ")
-/*    @Update({
-        "update affair",
-        "set is_deleted = #{1,jdbcType=BIT}",
-            "where id = #{id,jdbcType=BIGINT}"
-    })*/
+    @Update("update affair set is_deleted = 1 WHERE id=#{id}")
     boolean deleteByPrimaryKey(Long id);
 
-    @Update({
-            "update affair",
-            "set is_deleted = 0",
-            "where id = #{id,jdbcType=BIGINT}"
-    })
+    @Update("update affair, set is_deleted = 0, where id = #{id}")
     boolean UndeleteByPrimaryKey(Long id);
 
-    @Insert({
-        "insert into affair (id, end_time, ",
-        "start_time, title, ",
-        "content, is_OK, type, ",
-        "is_deleted，club_id)",
-        "values (#{id,jdbcType=BIGINT}, #{endTime,jdbcType=TIMESTAMP}, ",
-        "#{startTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, ",
-        "#{content,jdbcType=VARCHAR}, #{isOk,jdbcType=BIT}, #{type,jdbcType=INTEGER}, ",
-        "#{isDeleted,jdbcType=BIT},#{club_id,jdbcType=INTEGER})"
-    })
+    @Insert(
+        "INSERT INTO affair （id，end_time，start_time, title,content, is_OK, type,is_deleted，club_id)VALUES (#{id}," +
+                "#{endTime},#{startTime},#{title},#{content},#{isOk},#{type},#{isDeleted},#{club_id}) "
+    )
     boolean insert(Affair record);
 
-
-
-    @Select("SELECT * FROM affair WHERE id=#{id,jdbcType=BIGINT}")
+    @Select("SELECT * FROM affair WHERE id=#{id}")
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
@@ -57,12 +40,9 @@ public interface AffairMapper {
     /**
      修改id类型为long
      */
-
-    @Select({
-        "select",
-        "id, end_time, start_time, title, content, is_OK, type, is_deleted，club_id",
-        "from affair"
-    })
+    @Select(
+        "select, id, end_time, start_time, title, content, is_OK, type, is_deleted，club_id, from affair"
+    )
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
         @Result(column="end_time", property="endTime", jdbcType=JdbcType.TIMESTAMP),
@@ -78,15 +58,9 @@ public interface AffairMapper {
 /*
 * 删去对club_id和is_deleted的修改
 * */
-    @Update({
-        "update affair",
-        "set end_time = #{endTime,jdbcType=TIMESTAMP},",
-          "start_time = #{startTime,jdbcType=TIMESTAMP},",
-          "title = #{title,jdbcType=VARCHAR},",
-          "content = #{content,jdbcType=VARCHAR},",
-          "is_OK = #{isOk,jdbcType=BIT},",
-          "type = #{type,jdbcType=INTEGER},",
-        "where id = #{id,jdbcType=BIGINT}"
-    })
+    @Update(
+        "UPDATE affair SET end_time = #{endTime,jdbcType=TIMESTAMP}, start_time = #{startTime,jdbcType=TIMESTAMP}, " + "title = #{title,jdbcType=VARCHAR}, " +
+                "content = #{content,jdbcType=VARCHAR}, is_OK = #{isOk,jdbcType=BIT}, type = #{type,jdbcType=INTEGER}, where id = #{id,jdbcType=BIGINT}"
+    )
     boolean updateByPrimaryKey(Affair affair);
 }

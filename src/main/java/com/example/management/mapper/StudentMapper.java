@@ -25,7 +25,6 @@ public interface StudentMapper extends BaseMapper<Student> {
     })
     List<Student> getStuList(long deptId);
 
-
     @Select("SELECT * FROM mem WHERE name=#{name} AND dept_id=#{deptId} AND is_deleted = 0")
     @Results({
             @Result(column="name", property="stuName"),
