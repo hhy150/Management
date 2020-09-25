@@ -6,9 +6,9 @@ public class AuthURL {
    //注意/* 和/** 的区别
    public static String[] STU_AUTH = {"/common/**","login/logout"};
    public static String[] CLUB_AUTH ={"/common/**", "/resetPwd/**","memaffair/**",
-           "/affair/**", "/dept/**","/stu/**","/club/update","/login/**"};
+           "/affair/**", "/department/**","/stu/**","/club/update","/login/**"};
    public static String[] DEPT_AUTH ={"/common/**","/resetPwd/**",
            "/affair/send","/stu/**","/login/**"};
    public static String[] SUPER_ADMIN_AUTH={"/common/**","/resetPwd/**",
-           "/club/**","/dept/**","/login/**"};
+           "/club/**","/department/**","/login/**"};
  }

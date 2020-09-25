@@ -24,17 +24,13 @@ public class MemAffairSeviceImpl implements MemAffairService {
     public boolean deleteMemAffairById(Long id) {
         return memAffairMapper.deleteByPrimaryKey(id);
     }
-    /**
-     修改id类型为long
-     */
+
     @CachePut(key = "#id",condition = "#result==true")
     @Override
     public boolean UnDeleteByPrimaryKey(Long id) {
         return memAffairMapper.deleteByPrimaryKey(id);
     }
-    /**
-     修改id类型为long
-     */
+
     @CachePut(key = "#memAffair.id",condition = "#result==true")
     @Override
     public boolean addMemAffair(MemAffair memAffair) {
@@ -52,9 +48,7 @@ public class MemAffairSeviceImpl implements MemAffairService {
     public MemAffair getAffairById(Long id) {
         return memAffairMapper.selectByPrimaryKey(id);
     }
-    /**
-     修改id类型为long
-     */
+
     //@Cacheable(key = "#root.methodName")
     @Override
     public PageInfo<MemAffair> getAll(int pageNum, int pageSize) {

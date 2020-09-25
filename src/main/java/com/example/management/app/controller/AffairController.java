@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.format.DateTimeFormatter;
 
 
@@ -45,7 +44,7 @@ public class AffairController {
     }
 
     @PutMapping("update")
-   public ResultBody UpdateAffair(@RequestBody Affair affair ){
+    public ResultBody UpdateAffair(@RequestBody Affair affair ){
         if(affairService.updateAffair(affair))
             return ResultBody.success();
         return ResultBody.error("更新失败");
@@ -58,13 +57,7 @@ public class AffairController {
             return ResultBody.success(affair);
         return  ResultBody.error("查找失败");
     }
-    /**
-     修改id类型为long
-     */
 
-    /**
-     * 添加分页
-     */
     @GetMapping("getAll")
     public ResultBody getAll(@RequestParam(value = "pageNum",defaultValue = "1")int pageNum,
                          @RequestParam(value = "pageSize",defaultValue = "5")int pageSize){
@@ -89,5 +82,4 @@ public class AffairController {
         affairService.sendAffair(sendAffairParam);
         return ResultBody.success(affair);
     }
-
 }

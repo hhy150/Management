@@ -20,6 +20,8 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 @CacheConfig(cacheNames = "affair")
@@ -33,7 +35,7 @@ public class AffairServiceImpl implements AffairService {
     private StuService stuService;
 
     private static final Logger LOG = LoggerFactory.getLogger(AffairServiceImpl.class);
-
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     private static final String SUCCESS = "派发成功";
 
     //@CachePut(value = "affair",key = "#id")
@@ -59,6 +61,7 @@ public class AffairServiceImpl implements AffairService {
   //  @CachePut(value = "affair",key = "affair.id")
     @Override
     public boolean updateAffair(Affair affair) {
+        System.out.println(affair);
         return affairMapper.updateByPrimaryKey(affair);
     }
 

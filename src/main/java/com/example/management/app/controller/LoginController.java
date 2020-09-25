@@ -6,7 +6,6 @@ import com.example.management.entity.LoginResponse;
 import com.example.management.entity.ResultBody;
 import com.example.management.service.LoginService;
 import com.example.management.util.ConstantUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

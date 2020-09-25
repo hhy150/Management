@@ -132,7 +132,7 @@ public class LoginServiceImpl implements LoginService {
             case 3:
                 Club club =loginMapper.getClubByName(username);
                 List<Department> list1=loginMapper.getDeptList(club.getId());
-                return new PageInfo<>(ToolUtil.saveDept(list1));
+                return new PageInfo<>(ToolUtil.saveDept(list1,club.getId()));
             case 4:
                 List<Club> list2=loginMapper.getClubList();
                 return new PageInfo<>(ToolUtil.saveClub(list2));

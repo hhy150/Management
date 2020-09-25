@@ -12,12 +12,12 @@ import java.util.List;
 public interface MemAffairMapper {
 
     @Update(
-        "update  mem_affair, SET is_deleted= 1 , where id = #{id}"
+        "update  mem_affair  SET is_deleted= 1  where id = #{id}"
     )
     boolean deleteByPrimaryKey(Long id);
 
     @Update(
-            "update mem_affair,set is_deleted = 0，where id = #{id}"
+            "update mem_affair set is_deleted = 0 where id = #{id}"
     )
     boolean UndeleteByPrimaryKey(Long id);
 
@@ -25,12 +25,13 @@ public interface MemAffairMapper {
     修改id类型为long
      */
     @Insert(
-        "insert into mem_affair (id, mem_id, affair_id, is_deleted)，values (#{id}, #{memId}, #{affairId}, #{isDeleted})"
+        "insert into mem_affair (id, mem_id, affair_id, is_deleted)" +
+                "values (#{id}, #{memId}, #{affairId}, #{isDeleted})"
     )
     boolean insert(MemAffair record);
 
     @Select(
-        "select, id, mem_id, affair_id, from mem_affair, where id = #{id}"
+        "select id, mem_id, affair_id from mem_affair where id = #{id}"
     )
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),

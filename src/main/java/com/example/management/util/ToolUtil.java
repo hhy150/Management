@@ -22,10 +22,11 @@ public class ToolUtil {
         }
         return list;
     }
-    public static List<Department> saveDept(List<Department> list){
+    public static List<Department> saveDept(List<Department> list,Long clubId){
         for (Department department : list) {
             department.setUsername("****");
             department.setPassword("****");
+            department.setComId(clubId);
         }
         return list;
     }

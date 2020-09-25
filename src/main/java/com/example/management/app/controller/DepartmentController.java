@@ -4,19 +4,22 @@ package com.example.management.app.controller;
 import com.example.management.entity.Department;
 import com.example.management.entity.ResultBody;
 import com.example.management.service.DepartmentService;
+import com.example.management.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/department")
 public class DepartmentController {
 
     private final DepartmentService departmentService;
+    public final LoginService loginService;
     @Autowired
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService, LoginService loginService) {
         this.departmentService = departmentService;
+        this.loginService = loginService;
     }
 
     /**
@@ -49,6 +52,14 @@ public class DepartmentController {
         return ResultBody.success();
     }
 
+    /**
+     * 获得deptList
+     * */
+    @GetMapping("list")
+    public ResultBody deptList( @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum,
+                                @RequestParam(defaultValue = "5", value = "pageSize") Integer pageSize){
+        return ResultBody.success(loginService.getListByRole(pageNum,pageSize));
+    }
 
 
 }

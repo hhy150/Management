@@ -45,14 +45,18 @@ public class GlobalExceptionHandler {
         return ResultBody.error(ResultEnum.NULL_POINT);
     }
 
-    /**
+/*
+    */
+/**
      * 捕获400异常
-     */
+     *//*
+
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
         public ResultBody  HttpMessageNotReadableExceptionHandler( HttpMessageNotReadableException e){
             logger.error("错误请求",e.getMessage());
             return ResultBody.error(ResultEnum.BAD_REQUEST);
     }
+*/
 
     /**
      * IO异常处理

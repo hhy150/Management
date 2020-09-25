@@ -1,13 +1,17 @@
 package com.example.management.entity;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Affair  implements Serializable {
     private Long id;
+    @JSONField(format = "yyyy-mm-dd hh:mm:ss")
     private LocalDateTime startTime;
+    @JSONField(format = "yyyy-mm-dd hh:mm:ss")
     private LocalDateTime endTime;
     private String title;
     private String content;
@@ -87,5 +91,19 @@ public class Affair  implements Serializable {
 
     public void setIsDeleted(Integer isDeleted) {
         IsDeleted = isDeleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Affair{" +
+                "id=" + id +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", isOK=" + isOK +
+                ", type=" + type +
+                ", clubId=" + clubId +
+                '}';
     }
 }
